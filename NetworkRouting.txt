@@ -1,0 +1,57 @@
+package network;
+
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
+
+	class Router implements Comparable<Router> {
+	    private String s1;
+	    private int priority;
+
+	    public Router(String s1, int priority) {
+	        this.s1 = s1;
+	        this.priority = priority;
+	    }
+
+	    public String gets1() {
+	        return s1;
+	    }
+
+	    public int getPriority() {
+	        return priority;
+	    }
+
+	    @Override
+	    public int compareTo(Router other) {
+	        return Integer.compare(this.priority, other.priority);
+	    }
+	}
+
+	public class ComparableQueue {
+
+	    public static void main(String[] args) {
+	       
+	        Comparator<Router> comparator = new Comparator<Router>() {
+	        	
+	            @Override
+	            public int compare(Router r1, Router r2) {
+	                return Integer.compare(r1.getPriority(), r2.getPriority());
+	            }
+	        };
+
+	        PriorityQueue<Router> priorityQueue = new PriorityQueue<>(comparator);
+
+	  
+	        priorityQueue.add(new Router("Static Routing", 1));
+	        priorityQueue.add(new Router("Dynamic Routing", 1));
+	        priorityQueue.add(new Router("Default Routing", 3));
+	        priorityQueue.add(new Router("OSPF Routing", 3));
+	        priorityQueue.add(new Router("BGP Routing", 2));
+	        priorityQueue.add(new Router("IGP Routing", 2));
+
+	        System.out.println("Router on priority:");
+	        while (!priorityQueue.isEmpty()) {
+	            System.out.println(priorityQueue.poll().gets1());
+	        }
+	    }
+	}
